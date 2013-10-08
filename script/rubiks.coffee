@@ -1,6 +1,6 @@
 requirejs.config(
     paths: 
-       jquery:'lib/jquery-2.0.0.min'
+       jquery:'http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min'
        gl:'lib/gl-matrix'
        jdrag:'lib/jquery.event.drag-2.2'
     shim:
