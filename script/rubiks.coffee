@@ -490,7 +490,7 @@ require ['jquery', 'gl/mat4', 'gl/vec4', 'gl/vec3', 'gl/quat', 'rcube', 'jdrag']
     
             gl.useProgram(@program)
             gl.enable(gl.DEPTH_TEST)
-            gl.clearColor(0.7, 0.7, 0.7, 1)
+            gl.clearColor(1,1,1,1) #0.7, 0.7, 0.7, 1)
 
             m = mat4.create()
             @modelViewMatrix = gl.getUniformLocation(@program, "uMVMatrix")
