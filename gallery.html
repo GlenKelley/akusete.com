@@ -7,8 +7,9 @@
 	<meta content="portofolio" name="keywords">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 
-   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/2.3.0/css/bootstrap.min.css">
-   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/2.3.0/css/bootstrap-responsive.min.css">
+   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+   <!-- <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.css"> -->
+   <!-- <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/2.3.0/css/bootstrap-responsive.min.css"> -->
 	<link rel="stylesheet" href="style/style.css">
 
 	<!-- start: favicon -->
@@ -16,7 +17,7 @@
 	<!-- end: favicon -->
 </head>
 
-<body>
+<body class="gallery">
 
 <div id="outer-wrap">
 	<div id="inner-wrap">
@@ -39,55 +40,50 @@
 					<div class="block">
 						<ul>
                      <li class="is-active"><a href="index.html" class="home">Home</a></li>
-                     <!-- <li><a href="about.html" class="about">About</a></li> -->
-                     <!-- <li><a href="blog.html" class="services">Blog</a></li> -->
-                     <!-- <li><a href="work.html" class="work">Work</a></li> -->
                      <li><a href="gallery.html" class="portofolio">Gallery</a></li>
-                     <!-- <li><a href="contact.html" class="contact">Contact</a></li> -->
 						</ul>
 					</div>	
 				</nav>		
 				<div class="social">
-               <!-- <a href="#"><i class="icon-facebook"></i></a> -->
-               <!-- <a href="#"><i class="icon-twitter"></i></a> -->
-               <!-- <a href="#"><i class="icon-google-plus"></i></a> -->
-               <!-- <a href="#"><i class="icon-pinterest-sign"></i></a> -->
 				</div>
 			</div>
 		</div><!--end: sidebar -->
 
 		<!--start: content -->
 		<div class="content">
+         <div id="Carousel" class="carousel slide col-lg-8 col-offset-2">
+                 <ol class="carousel-indicators">
+                     <li data-target="Carousel" data-slide-to="0" class="active"></li>
+                     <li data-target="Carousel" data-slide-to="1"></li>
+                     <li data-target="Carousel" data-slide-to="2"></li>
+                 </ol>
 
-			<div class="span9">
+                 <div class="carousel-inner">
+                     <div class="item active">
+                         <img src="images/rubiks.png" class="img-responsive">
+                     </div>
+                 </div>
 
-				<div class="span9 offset1 home-content">
-               <div class="home-title">
-					<h1>It’s amazing how much you can get done in a day if you just sit and you do it.</h1>
-               </div>
-				</div>
-				<div class="span9 offset1 home-content">
-					<div class="row">
-						<div class="span9">
-                    <p class="lead"><a href="rubiks">Rubiks cube in WebGL</a></p>
-                    <p>
-                       I recently lost my Rubiks cube, and decided to create a digital replacement.
-                    </p>
-                    <p>
-                       Modelling a Rubiks cube turned out to touch on a few interesting trade-offs commonly encountered when trying to model real or abstract systems.
-                    </p>
-						</div>
-					</div>
-				</div>
-
-			</div>
-
+                 <a class="left carousel-control" href="#Carousel" data-slide="prev">
+                     <span class="glyphicon glyphicon-chevron-left"></span>
+                 </a>
+                 <a class="right carousel-control" href="#Carousel" data-slide="next">
+                     <span class="glyphicon glyphicon-chevron-right"></span>
+                 </a>
+         </div>
 		</div><!--end: content --> 
 
 	</div> <!--end: inner-wrap -->
 </div> <!--end: outer-wrap -->
 
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-</body>
+   <script>
+      $(function() {
+         console.log($('.carousel'))
+         $('.carousel').carousel()         
+      })
+   </script>
+	</body>
+
 </html>
