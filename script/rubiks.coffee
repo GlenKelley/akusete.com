@@ -504,7 +504,7 @@ require ['jquery', 'gl/mat4', 'gl/vec4', 'gl/vec3', 'gl/quat', 'rcube', 'jdrag']
             h = 1
             znear = 5.0
             zfar = 30.0
-            xmax = znear * 0.5
+            xmax = znear * 0.25
             mat4.frustum(m, -xmax, xmax, -xmax*h, xmax*h, znear, zfar)
             gl.uniformMatrix4fv(@projectionViewMatrix, false, m)
 
