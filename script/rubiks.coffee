@@ -245,12 +245,12 @@ require ['jquery', 'gl/mat4', 'gl/vec4', 'gl/vec3', 'gl/quat', 'rcube', 'jdrag']
         drawCube:(cube, rotation, modelview, colorBuffer, modelBuffer)->
             gl = @gl
             colors = [
-                [1,0,0]
-                [1, 0.5, 0]
-                [0,1,0]
-                [0,0,1]
+                [1,0.2,0.2]
+                [1, 0.5, 0.2]
+                [0.2,1,0.2]
+                [0.2,0.2,1]
                 [1,1,1]
-                [1,1,0]
+                [1,1,0.2]
             ]
             # colors = [
             #     [0.0,0,0]
