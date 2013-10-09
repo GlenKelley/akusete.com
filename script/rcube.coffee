@@ -1,5 +1,7 @@
 
 define ()->
+   
+    eqif = (test, a, b) -> return (test && a) || (test && b)
     CubeLength = 3
     FaceSize = CubeLength * CubeLength
     RingLength = 4
@@ -7,88 +9,21 @@ define ()->
     Faces = 6
     CubeSize = Faces * FaceSize
     Axes = 3
-    
     X = 0
     Y = 1
     Z = 2
-
     LOW = 0
     HIGH = 1
 
-    NextAxis = (axis)->(axis+1)%Axes 
-    shiftUp = (a)->
-        x = a.pop()
-        a.unshift(x)
-    shiftDown = (a)->
-        x = a.shift()
-        a.push(x)
+    NextAxis = (axis) ->(axis+1)%Axes 
+    shiftUp = (a) -> a.unshift(a.pop())
+    shiftDown = (a) -> a.push(a.shift())
     IsRowMajor = (axis, faceAxis) -> ((faceAxis - axis + Axes) % Axes) != 1
-
-    # //    Y2         5
-    # // X1|Z2|X2  0 | 2 | 1
-    # //    Y1         4
-    # //    Z1         3
-    #     1:21
-    #     3:37
-    #     5:46
-    #     7:30
-    #     10:23
-    #     12:43
-    #     14:52
-    #     16:32
-    #     19:39
-    #     23:10
-    #     25:48
-    #     28:41
-    #     30:7
-    #     32:16
-    #     34:50
-    #     37:3
-    #     39:19
-    #     41:28
-    #     43:12
-    #     46:5
-    #     48:25
-    #     50:34
-    #     52:14
-    # corners =
-    #     0:[18,36]
-    #     2:[24,45]
-    #     6:[27,38]
-    #     8:[33,47]
-    #     9:[26,51]
-    #     11:[20,42]
-    #     15:[29,44]
-    #     17:[35,53]
-    #     18:[0,36]
-    #     20:[11,42]
-    #     24:[2,45]
-    #     26:[0,51]
-    #     27:[6,38]
-    #     29:[15,44]
-    #     33:[8,47]
-    #     35:[17,53]
-    #     36:[0,18]
-    #     38:[6,27]
-    #     42:[11,20]
-    #     44:[15,29]
-    #     45:[2,24]
-    #     47:[8,33]
-    #     51:[9,26]
-    #     53:[17,35]
-    # center = 
-    #     4:true
-    #     13:true
-    #     22:true
-    #     31:true
-    #     40:true
-    #     49:true
     class Cube
         constructor:()->
             @Squares = []
             for i in [0..Faces-1]
                 for j in [0..FaceSize-1]
-                    # n = (x[i*FaceSize+j] && 1) || 0
                     @Squares.push(i)
         Clone:()->
             c = new Cube()
@@ -97,39 +32,31 @@ define ()->
             return c
         SetRow:(axis, face, row, invert, r)->
             offset = (axis * 2 + face) * FaceSize + row * CubeLength
-            if invert 
-                for i in [0..CubeLength-1]
-                    @Squares[offset+i] = r[i]
-            else 
-                for i in [0..CubeLength-1]
-                    @Squares[offset+i] = r[CubeLength-1-i]
+            m  = eqif(invert, 1, -1)
+            x0 = eqif(invert, 0, CubeLength-1)
+            for i in [0..CubeLength-1]
+              @Squares[offset+i] = r[x0+m*i]
         SetColumn:(axis, face, row, invert, r)->
             offset = (axis * 2 + face) * FaceSize + row
-            if invert 
-                for i in [0..CubeLength-1]
-                    @Squares[offset + i*CubeLength] = r[i]
-            else 
-                for i in [0..CubeLength-1]
-                    @Squares[offset + i*CubeLength] = r[CubeLength-1-i]
+            m = eqif(invert, 1, -1)
+            x0 = eqif(invert, CubeLength-1)
+            for i in [0..CubeLength-1]
+              @Squares[offset + i*CubeLength] = r[x0+m*i]
         Row:(axis, face, row, invert)->
             r = []
             offset = (axis * 2 + face) * FaceSize + row * CubeLength
-            if invert
-                for i in [0..CubeLength-1]
-                    r.push(@Squares[offset+i])
-            else
-                for i in [0..CubeLength-1]
-                    r.push(@Squares[offset+CubeLength-1-i])
+            m  = eqif(invert, 1, -1)
+            x0 = eqif(invert, 0, CubeLength-1)
+            for i in [0..CubeLength-1]
+              r.push(@Squares[offset+x0+m*i])
             return r
         Column:(axis, face, row, invert)->
             r = []
             offset = (axis * 2 + face) * FaceSize + row
-            if invert
-                for i in [0..CubeLength-1]
-                    r.push(@Squares[offset+i*CubeLength])
-            else
-                for i in [0..CubeLength-1]
-                    r.push(@Squares[offset+(CubeLength-1-i)*CubeLength])
+            m  = eqif(invert, 1, -1)
+            x0 = eqif(invert, 0, CubeLength-1)
+            for i in [0..CubeLength-1]
+              r.push(@Squares[offset+(x0+m*i)*CubeLength])
             return r
         Ring:(axis, row)->
             a2 = NextAxis(axis)
